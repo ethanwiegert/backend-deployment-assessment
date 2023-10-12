@@ -5,7 +5,9 @@
   "main": "jest.config.js",
   "directories": {
     "src": "src",
-    "test": "test"
+    "test": "test",
+    "start": "node server",
+    "client": "npm start --prefix client"
   },
   "scripts": {
     "start": "node src/server.js",
