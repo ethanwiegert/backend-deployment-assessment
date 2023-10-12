@@ -1,21 +1,10 @@
-require("dotenv").config();
-
-const path = require("path");
-
-const {
-  NODE_ENV = "development",
-  DEVELOPMENT_DATABASE_URL,
-  PRODUCTION_DATABASE_URL,
-} = process.env;
-const URL =
-  NODE_ENV === "production"
-    ? PRODUCTION_DATABASE_URL
-    : DEVELOPMENT_DATABASE_URL;
-
-module.exports = {
+const path = require("path");require("dotenv").config();// const {
+  DATABASE_URL = URL, process.env;
+  const { DATABASE_URL } = process.env;
+  module.exports = {
   development: {
     client: "postgresql",
-    connection: URL,
+    connection: DATABASE_URL,
     pool: { min: 0, max: 5 },
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
@@ -23,11 +12,9 @@ module.exports = {
     seeds: {
       directory: path.join(__dirname, "src", "db", "seeds"),
     },
-  },
-
-  production: {
+  },  production: {
     client: "postgresql",
-    connection: URL,
+    connection: DATABASE_URL,
     pool: { min: 0, max: 5 },
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
@@ -35,11 +22,11 @@ module.exports = {
     seeds: {
       directory: path.join(__dirname, "src", "db", "seeds"),
     },
-  },
-
-  test: {
-    client: "postgresql",
-    connection: URL,
+  },  test: {
+    client: "sqlite3",
+    connection: {
+      filename: ":memory:",
+    },
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
     },
